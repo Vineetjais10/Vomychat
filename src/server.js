@@ -6,6 +6,7 @@ import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import referralRoutes from './routes/referralRoutes.js';
 import { authLimiter } from './middleware/rateLimit.js';
+import cookieParser from 'cookie-parser'; 
 
 // Load environment variables
 dotenv.config();
@@ -21,7 +22,7 @@ connectDB();
 app.use(express.json()); // Parse JSON bodies
 app.use(cors()); // Enable CORS
 app.use(helmet()); // Security headers
-
+app.use(cookieParser());
 // Rate limiting for auth routes
 app.use('/api/auth', authLimiter);
 
